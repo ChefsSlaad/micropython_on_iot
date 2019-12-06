@@ -5,7 +5,7 @@ import ubinascii
 station = network.WLAN(network.STA_IF)
 accesspoint = network.WLAN(network.AP_IF)
 
-network = ({'ssid':'micropython','password':'PyAmsterdam'},
+network = ({'ssid':'micropython','password':'pyAmsterdam'},
            {'ssid':'test', 'password':'testtest'}
           )
 
@@ -69,3 +69,6 @@ def config_ap(ssid = 'Hello PyAmsterdam', pwd = 'terrible_88', active = False):
     accesspoint.config_ap(essid = ssid)
     accesspoint.config_ap(password = pwd)
     accesspoint.active(active)
+
+
+scan_and_connect()

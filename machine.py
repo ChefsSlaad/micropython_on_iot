@@ -10,7 +10,7 @@ class Pin():
     def value(self, val = None):
         if val == None:
             return self._val
-        else: 
+        else:
             if val in (0,1):
                 self._val = val
                 return self._val
@@ -24,7 +24,7 @@ class Pin():
         self._trigger(self.pin)
 
 class PWM():
-    def __init__(self, pin, freq, duty):
+    def __init__(self, pin, freq=1000, duty=0):
         self.pin      = pin
         self.pin_no   = pin.pin
         self.freq     = freq
