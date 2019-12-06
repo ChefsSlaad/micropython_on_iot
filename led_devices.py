@@ -23,6 +23,10 @@ class led_pwm_simple():
         self.val         = 0
         self.value(0)
 
+    def __repr__(self):
+        return "value: {}, duty: {}, inverted: {}".format(
+                self.val, self._pwm_device.duty(), self.inverted)
+
     def value(self, value = None):
         if value == None:
             return self.val

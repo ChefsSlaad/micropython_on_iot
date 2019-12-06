@@ -1,11 +1,17 @@
 
-Pin.OUT = None
-Pin.IN = None
+
 
 class Pin():
+
     def __init__(self, pin = None, pin_mode = None):
         self.pin = pin
         self._val= 0
+
+        self.OUT = None
+        self.IN = None
+        self.IRQ_FALLING = None
+        self.IRQ_RISING  = None
+
 
     def value(self, val = None):
         if val == None:
@@ -16,12 +22,16 @@ class Pin():
                 return self._val
         raise ValueError ('value must be 0 or 1')
 
-    def irq(self, handler=None, trigger=(self.IRQ_FALLING | self.IRQ_RISING), *, priority=1, wake=None, hard=False):
+    def irq(self, handler=None, trigger=None, *, priority=1, wake=None, hard=False):
         self._handler = handler
         self._trigger = False
 
     def __trigger_irq(self):
         self._trigger(self.pin)
+
+Pin.IN = None
+Pin.OUT = None
+
 
 class PWM():
     def __init__(self, pin, freq=1000, duty=0):
