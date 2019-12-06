@@ -1,7 +1,9 @@
 import machine
 import socket
 import time
+from dht import DHT11
 
+temp_lists = []
 
 def web_response(ledValue):
 
@@ -11,11 +13,6 @@ def web_response(ledValue):
     <title>My First Web Server</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="data:,">
-    <script>
-    setTimeout(function(){
-        window.location.reload(1);
-        }, 5000);
-    </script>
     <style>
         html{
             font-family: Helvetica;
@@ -58,8 +55,9 @@ def web_response(ledValue):
 
 
 def setup_and_run():
+    led = machine.PWM(machine.Pin(5))
+    sensor = DHT11(machine.Pin(4))
 
-    led = machine.PWM(machine.Pin(2))
     ledValue = 'OFF'
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -67,7 +65,6 @@ def setup_and_run():
     s.listen(5)
 
     while True:
-
         conn, addr = s.accept()
         print(addr)
         request = conn.recv(1024)
@@ -79,11 +76,12 @@ def setup_and_run():
             led.duty(1023)
             ledValue='ON'
 
+
+
         conn.send('HTTP/1.1 200 OK\n')
         conn.send('Content-Type: text/html\n')
         conn.send('Connection: close\n\n')
         conn.sendall(web_response(ledValue))
         conn.close()
 
-if __name__ == '__main__':
-    setup_and_run()
+setup_and_run()
