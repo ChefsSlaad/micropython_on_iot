@@ -1,9 +1,6 @@
 import machine
 import socket
 import time
-from dht import DHT11
-
-temp_lists = []
 
 def web_response(ledValue):
 
@@ -54,9 +51,8 @@ def web_response(ledValue):
 </html>"""
 
 
-def setup_and_run():
+def run_webserver():
     led = machine.PWM(machine.Pin(5))
-    sensor = DHT11(machine.Pin(4))
 
     ledValue = 'OFF'
 
@@ -83,5 +79,3 @@ def setup_and_run():
         conn.send('Connection: close\n\n')
         conn.sendall(web_response(ledValue))
         conn.close()
-
-setup_and_run()

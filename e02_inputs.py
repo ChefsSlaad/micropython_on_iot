@@ -1,4 +1,4 @@
-from machine import Pin
+from machine import Pin, PWM
 from time import sleep_ms
 import dht
 
@@ -11,18 +11,21 @@ def button_pushed(p):
     elif led.value() == 0:
         led.value(1)
 
-btn = Pin(14, Pin.IN)
-led = Pin(5,  Pin.OUT)
-btn.irq(handler = button_pushed, trigger = Pin.IRQ_FALLING)
+def button():
+    global led
+    global btn
+    btn = Pin(14, Pin.IN)
+    led = Pin(5,  Pin.OUT)
+    btn.irq(handler = button_pushed, trigger = Pin.IRQ_FALLING)
 
 
-tilt = Pin(4, Pin.IN)
-til.irq(lambda p: print('tilt'), tirgger = Pin.IRQ_FALLING)
+def tilt_sensor():
+    tilt = Pin(4, Pin.IN)
+    tilt.irq(handler = lambda p: print('tilt'), tirgger = Pin.IRQ_FALLING)
 
 
-
-th_sensor = dht.DHT11(Pin(0))
-def temp_humid(sensor = th_sensor):
+def temp_humid():
+    sensor = dht.DHT11(Pin(0))
     while True:
         sensor.measure()
         print('temperature {:>2}c    humidity {:>2}%'.format(

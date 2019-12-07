@@ -13,7 +13,7 @@ network = ({'ssid':'micropython','password':'pyAmsterdam'},
 
 def scan_networks():
     aps     = station.scan()
-    print('network                         channel signal security    hidden  mac')
+    print('network                         channel signal security     hidden  mac')
     for ap in aps:
         ssid = ap[0].decode('utf-8')
         mac = ubinascii.hexlify(ap[1]).decode('utf-8').upper()
@@ -22,7 +22,7 @@ def scan_networks():
         signal = ap[3]
         auth = ('open', 'WEP', 'WPA-PSK', 'WPA2-PSK', 'WPA/WPA2-PSK','')[ap[4]]
         vis = ('visible', 'hidden')[ap[5]]
-        print('{:32} {:>6} {:>5} {:12} {:7} {}'.format(ssid,ap[2],ap[3],auth,vis,mac))
+        print('{:32} {:>6} {:>6} {:12} {:7} {}'.format(ssid,ap[2],ap[3],auth,vis,mac))
 
 
 
