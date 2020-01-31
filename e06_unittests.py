@@ -63,7 +63,7 @@ class led_tests(unittest.TestCase):
     def test_led_pwm_set(self):
         for v in range(256):
             self.single_led.value(v)
-            self.assertEqual(self.single_led._pwm_device.duty(), int(round(4.012 * v)))
+            self.assertEqual(led_testsself.single_led._pwm_device.duty(), int(round(4.012 * v)))
 
     def test_out_of_bounds_errors(self):
         pass

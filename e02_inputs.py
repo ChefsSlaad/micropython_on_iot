@@ -18,10 +18,8 @@ def button():
     led = Pin(5,  Pin.OUT)
     btn.irq(handler = button_pushed, trigger = Pin.IRQ_FALLING)
 
-
-def tilt_sensor():
-    tilt = Pin(4, Pin.IN)
-    tilt.irq(handler = lambda p: print('tilt'), tirgger = Pin.IRQ_FALLING)
+tilt = Pin(4, Pin.IN)
+tilt.irq(handler = lambda p: print('tilt'), tirgger = Pin.IRQ_FALLING)
 
 
 def temp_humid():

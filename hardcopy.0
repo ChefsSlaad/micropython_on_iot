@@ -1,0 +1,13 @@
+>>>
+>>>
+>>>
+>>> import os
+>>> os.listdir()
+['boot.py', 'webrepl_cfg.py', 'main.py']
+>>> from network import WLAN, STA_IF
+>>> station = WLAN(STA_IF)
+>>> station.ifconfig()
+('10.0.0.248', '255.255.255.0', '10.0.0.1', '1.1.1.1')
+>>>
+>>>
+>>>
